@@ -1,0 +1,30 @@
+[
+  {
+    "level": "Beginner",
+    "name": "Shoulder - Light",
+    "description": "Dumbbell Shoulder Press, halka weight",
+    "sets": "4",
+    "reps": "12-15"
+  },
+  {
+    "level": "Beginner",
+    "name": "Chest - Light",
+    "description": "Incline push-ups / halka DB press",
+    "sets": "3",
+    "reps": "12-15"
+  },
+  {
+    "level": "Pro",
+    "name": "Seated Barbell Overhead Press",
+    "description": "Heavy compound + drop set",
+    "sets": "5",
+    "reps": "6-8"
+  },
+  {
+    "level": "Pro",
+    "name": "Arnold Press Superset",
+    "description": "Arnold press + lateral raise",
+    "sets": "4",
+    "reps": "10/12"
+  }
+]

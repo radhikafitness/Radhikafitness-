@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Radhika Fitness</title>
+  <link rel="manifest" href="/manifest.json" />
+  <style>
+    body{font-family: Arial, sans-serif; margin:0; background:#000; color:#fff;}
+    header{background:#b00000; padding:16px; display:flex; align-items:center; gap:12px}
+    header img{height:48px}
+    .container{padding:16px}
+    .card{background:#111; padding:12px; margin:10px 0; border-radius:8px}
+    .btn{background:#b00000; color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer}
+    nav{position:fixed; bottom:0; left:0; right:0; display:flex; gap:8px; padding:8px; background:#111;}
+    nav button{flex:1; padding:10px; border-radius:8px; border:none; background:#222; color:#fff}
+    .hide{display:none}
+    h1,h2{margin:6px 0}
+    .small{font-size:14px; color:#ccc}
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="logo"/>
+    <div>
+      <h1>Radhika Fitness</h1>
+      <div class="small">Train Hard • Eat Clean</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="home">
+      <div class="card">
+        <h2>Welcome</h2>
+        <p>Radhika Fitness ऐप में आपका स्वागत है — वर्कआउट और डाइट प्लान यहाँ मिलेंगे।</p>
+        <button class="btn" onclick="openPage('workout')">Start Workout</button>
+      </div>
+      <div class="card">
+        <h2>आज का Motivational Quote</h2>
+        <p>"Consistency से ही results आते हैं — आज भी मेहनत कर।"</p>
+      </div>
+    </section>
+
+    <section id="workout" class="hide">
+      <h2>वर्कआउट</h2>
+      <div>
+        <label><input type="radio" name="level" value="All" checked onchange="renderWorkouts()"> सभी </label>
+        <label><input type="radio" name="level" value="Beginner" onchange="renderWorkouts()"> Beginner </label>
+        <label><input type="radio" name="level" value="Pro" onchange="renderWorkouts()"> Pro </label>
+      </div>
+      <div id="workout-list"></div>
+    </section>
+
+    <section id="diet" class="hide">
+      <h2>डाइट प्लान</h2>
+      <div id="diet-list"></div>
+    </section>
+
+    <section id="profile" class="hide">
+      <h2>Radhika Fitness</h2>
+      <p>App by Madhuresh</p>
+      <p class="small">Follow: Instagram / YouTube</p>
+    </section>
+  </main>
+
+  <nav>
+    <button onclick="openPage('home')">Home</button>
+    <button onclick="openPage('workout')">Workout</button>
+    <button onclick="openPage('diet')">Diet</button>
+    <button onclick="openPage('profile')">Profile</button>
+  </nav>
+
+<script>
+async function loadData() {
+  window.workouts = await fetch('data_workouts.json').then(r=>r.json());
+  window.diets = await fetch('data_diets.json').then(r=>r.json());
+  renderWorkouts();
+  renderDiets();
+}
+
+function openPage(id) {
+  ['home','workout','diet','profile'].forEach(p=>document.getElementById(p).classList.add('hide'));
+  document.getElementById(id).classList.remove('hide');
+  window.scrollTo(0,0);
+}
+
+function renderWorkouts() {
+  const level = document.querySelector('input[name="level"]:checked').value;
+  const list = document.getElementById('workout-list');
+  list.innerHTML = '';
+  const items = window.workouts.filter(function(w){ return level==='All' ? true : w.level===level; });
+  items.forEach(function(w){
+    var card = document.createElement('div');
+    card.className='card';
+    card.innerHTML = '<h3>' + w.name + ' <span class="small">(' + w.level + ')</span></h3>'
+      + '<p>' + w.description + '</p>'
+      + '<p class="small">Sets: ' + w.sets + ' • Reps: ' + w.reps + '</p>';
+    list.appendChild(card);
+  });
+}
+
+function renderDiets() {
+  const list = document.getElementById('diet-list');
+  list.innerHTML = '';
+  window.diets.forEach(function(d){
+    var card = document.createElement('div');
+    card.className='card';
+    card.innerHTML = '<h3>' + d.meal_time + ' - ' + d.level + '</h3>'
+      + '<p>' + d.meal + '</p>'
+      + '<p class="small">' + d.notes + '</p>';
+    list.appendChild(card);
+  });
+}
+
+loadData();
+</script>
+</body>
+</html>

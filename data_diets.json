@@ -1,0 +1,20 @@
+[
+  {
+    "level": "Beginner",
+    "meal_time": "सुबह",
+    "meal": "Oats + banana + milk",
+    "notes": "हल्का और पचने में आसान"
+  },
+  {
+    "level": "Beginner",
+    "meal_time": "जिम से पहले",
+    "meal": "Banana + हल्का coffee",
+    "notes": "30 मिनट पहले"
+  },
+  {
+    "level": "Pro",
+    "meal_time": "प्रोटीन",
+    "meal": "Whey + soybean chunks",
+    "notes": "जिम के बाद"
+  }
+]
